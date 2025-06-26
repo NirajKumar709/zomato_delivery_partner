@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:zomato_delivery_partner/auth/sign_up.dart';
+import 'package:zomato_delivery_partner/main.dart';
 import 'package:zomato_delivery_partner/pages/home_page.dart';
 
 class SignIn extends StatefulWidget {
@@ -22,6 +23,8 @@ class _SignInState extends State<SignIn> {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
+            globalDocId = value.user!.uid;
+
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
