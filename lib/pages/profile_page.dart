@@ -49,7 +49,21 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Profile"), centerTitle: true),
+      appBar: AppBar(
+        title: Row(
+          spacing: 10,
+          children: [
+            dataStore.isNotEmpty
+                ? CircleAvatar(
+                  radius: 16,
+                  backgroundImage: NetworkImage(dataStore["imageURL"]),
+                )
+                : Center(child: CircularProgressIndicator()),
+            Text("Profile"),
+          ],
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
           Padding(
@@ -58,7 +72,16 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 dataStore.isNotEmpty
-                    ? Text(dataStore["name"] + " Profile Edit")
+                    ? Row(
+                      spacing: 10,
+                      children: [
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage: NetworkImage(dataStore["imageURL"]),
+                        ),
+                        Text(dataStore["name"] + " Profile"),
+                      ],
+                    )
                     : Center(child: CircularProgressIndicator()),
                 PopupMenuButton(
                   itemBuilder:
@@ -133,6 +156,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       title: Text(dataStore["name"]),
                       subtitle: Text(dataStore["phone_number"]),
                       trailing: Text(dataStore["address"]),
+                      leading: CircleAvatar(
+                        radius: 18,
+                        backgroundImage: NetworkImage(dataStore["imageURL"]),
+                      ),
                     )
                     : Center(child: CircularProgressIndicator()),
           ),

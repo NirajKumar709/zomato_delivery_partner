@@ -47,6 +47,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
                             title: Text(finalData["restaurantName"]),
                             subtitle: Text(finalData["foodType"]),
                             trailing: Text(finalData["address"]),
+                            leading: CircleAvatar(
+                              radius: 18,
+                              backgroundImage: NetworkImage(
+                                finalData["imageURL"],
+                              ),
+                            ),
                           ),
                         );
                       },
